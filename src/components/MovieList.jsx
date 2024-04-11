@@ -30,7 +30,7 @@ const MoviesList = () => {
 
     fetchMovies();
   }, []);
-
+  //aboba
   if (loading) {
     return <div>Loading...</div>;
   }
