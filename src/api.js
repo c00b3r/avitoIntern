@@ -1,3 +1,0 @@
-const API_TOKEN = "WF76VQQ-HQB4P5G-JFJH8DF-CRKDP1M";
-
-export default API_TOKEN;

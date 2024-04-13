@@ -9,7 +9,7 @@ const MoviesList = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      "X-API-KEY": "WF76VQQ-HQB4P5G-JFJH8DF-CRKDP1M",
+      "X-API-KEY": `${API_TOKEN}`,
     },
   };
 
