@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import API_TOKEN from "../token";
+import API_TOKEN from "../../token";
+import Pagination from "../Pagination/Pagination";
+import "./MovieList.css";
 
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
@@ -18,7 +19,7 @@ const MoviesList = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = fetch(
+        fetch(
           `https://api.kinopoisk.dev/v1.4/movie?page=${page}&limit=${limit}`,
           options
         )
@@ -33,40 +34,30 @@ const MoviesList = () => {
     };
 
     fetchMovies();
-  }, [page, limit]);
+  }, [page, limit, options]);
 
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
-
-  const handleLimitChange = (newLimit) => {
-    setLimit(newLimit);
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Загрузка фильмов</div>;
+  // }
 
   return (
-    <div>
-      <h2>Movies List</h2>
-      <ul>
+    <div className="main-wrapper">
+      <h2 className="h2">Список фильмов</h2>
+      <Pagination
+        page={page}
+        limit={limit}
+        setPage={setPage}
+        setLimit={setLimit}
+      />
+      <ul className="movie-list">
         {movies.map((movie) => (
-          <li key={movie.id}>{movie.name}</li>
+          <li key={movie.id} className="movie-item">
+            <div className="movie-box">
+              <h5>{movie.name}</h5>
+            </div>
+          </li>
         ))}
       </ul>
-      <div>
-        <button onClick={() => handlePageChange(page - 1)}>Previous</button>
-        <button onClick={() => handlePageChange(page + 1)}>Next</button>
-        <select
-          value={limit}
-          onChange={(e) => handleLimitChange(e.target.value)}
-        >
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
-      </div>
     </div>
   );
 };
